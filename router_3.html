@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>手动触发router</title>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/Underscore-1.8.3min.js"></script>
+		<script src="js/backbone.js"></script>
+		<script type="text/javascript">
+		</script>
+	</head> 
+	<body> 
+		<a href="#/route/211">获取id的值是</a>
+		<script type="text/javascript">
+			  var AppRouter=Backbone.Router.extend({
+				  	routes:{
+				  		"post/:id":"getPost",
+				  		"manual":"manual",
+				  		"*actions":"defaultRoute"
+				  	},
+				  	getPost:function(id){
+				  		alert(id+"getPost");
+				  	},
+				  	manual:function(){
+				  		alert("call manual");
+				  	},
+				  	defaultRoute:function(actions){
+				  		alert(actions);
+				  	}
+			  });
+			  
+			  (new AppRouter).navigate("#post/21",{trigger:true,replace:true})
+			  
+		</script> 
+	</body>
+</html>

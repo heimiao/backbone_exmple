@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>为对象添加验证规则，以及错误提示</title>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/Underscore-1.8.3.js"></script>
+		<script src="js/backbone.js"></script>
+		<script type="text/javascript">
+		</script>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			var Man = Backbone.Model.extend({
+				initialize: function() {
+					alert('Hey, you create me!');
+					//初始化时绑定监听, change 事件会先于 validate 发生
+					this.bind("change:name", function() {
+						var name = this.get("name");
+						alert("你改变了 name 属性为：" + name);
+					});
+					this.bind("invalid", function(model, error) {
+						alert(error);
+					});
+				},
+				defaults: {
+					name: '张三',
+					age: '38'
+				},
+				validate: function(attributes) {
+					if (attributes.name == '') {
+						return "name 不能为空！";
+					}
+				},
+				aboutMe: function() {
+					return '我叫' + this.get('name') + ',今年' + this.get('age') + '岁';
+				}
+			});
+			var man = new Man; // 这种方式添加错误处理也行// man.on('invalid', function(model, error) { // alert(error);// });
+				man.set({ name: ''}, //默认 set 时不进行验证//man.set({name:''},
+				{ 'validate':man }); //手动触发验证, set 时会触发 man.save(); //save 时触发验证。根据验证规则，弹出错误提示。
+				
+				
+			/*var Animal = Backbone.Model.extend({
+				initialize: function() {
+					console.log('hey,you create me');
+					this.bind("change:name", function() {
+						var name = this.get("name");
+						console.log("你改变了name属性为" + this.get("name"));
+					});
+					this.bind("validate", function(model, error) {
+						alert(error);
+					})
+				},
+				defaults: {
+					name: "宠物"
+				},
+				validate: function(attributes) {
+					if (attributes.name = "") {
+						return "name不能为空";
+					}
+				}
+			});
+			var cat = new Animal;
+			cat.set({
+				name: ""
+			});
+			// cat.save();   //save方法会触发绑定的验证*/
+		</script>
+	</body>
+
+</html>

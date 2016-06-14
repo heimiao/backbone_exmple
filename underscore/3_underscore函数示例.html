@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>underscore函数示例</title>
+		<script src="../js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/Underscore-1.8.3min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/backbone.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<script type="text/javascript">
+			//each函数的遍历
+			_.each([1, 2, 3, 4, 5], function(n) {
+				if (arguments[0] % 2 > 0) {
+					console.log(arguments[0]);
+				}
+			});
+			//map函数的遍历rn
+			var reutrnMap = _.map([1, 2, 3, 4, 5, 6, 7, 8], function(n) {
+				if (n % 2 == 0) return n;
+			});
+			for (var i = 0; i < reutrnMap.length; i++) {
+				if (reutrnMap[i] != undefined) {
+					console.log(i + "=>" + reutrnMap[i]);
+				}
+			}
+			//find跟上边的用法一样返回匹配到的第一个字段
+			//filter跟上边的用法一样返回匹配的数组
+			//_max,_.min();
+			//_sortBy(Array,interator,[contex])排序
+			//_groupBy(Array,interator,[contex])分组
+			//Array实例
+			//_first(Obj,[2])返回头两个字段_last(Obj,[2])返回最后两个字段
+			//_.without(Array,20,30)返回一个不包含20，30的新数组
+			//_.union(Array,Array,Array)返回多个数组的交集数组对象
+			//wrap//函数包装_.wrap(obj,function(obj){console.log(a)})
+			//delay函数相当于js的setItime（）；
+			//pick(obj,[a,b,c])挑选abc组成的新对象，,omit(obj,[a,b,c])除去abc的新对象
+			//default(obj,[a：1,a：1,a：1])返回一个有默认的对象
+			//has(obj,‘a'')返回一个boole判断obj里边是否有该属性
+			var tpl=_.template("<%console.log(str)%>");
+			tpl({str:'姓名：马维超'});
+			
+			var tpl=_.template("<%=str%>");
+			console.log(tpl({str:'姓名：马维超'}));
+	</script> 
+	<body>
+		<div id="divTip"> </div>
+	</body>
+
+</html>

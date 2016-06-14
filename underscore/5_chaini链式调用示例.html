@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>_chaini链式调用示例</title>
+		<script src="../js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/Underscore-1.8.3min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/backbone.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/data.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body> 
+		<script type="text/javascript">
+		 var lastValue=_.chain(numArray).filter(function(n){return n%2>0}).without(numArray,7).last().value()
+		 console.log(lastValue);
+		</script>
+	</body>
+
+</html>

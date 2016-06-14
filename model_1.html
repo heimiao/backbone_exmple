@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Backbone Demo</title>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/Underscore-1.8.3.js"></script>
+		<script src="js/backbone.js"></script>
+		<script type="text/javascript">
+		</script>
+	</head>
+	<body>
+		<button id="check">设置model属性和方法调用</button>  
+		<ul id="world-list">
+			
+		</ul>
+		<script type="text/javascript">
+			 var Man=Backbone.Model.extend({
+			 	initialize:function(){
+			 		alert("hey, you create me");
+			 	},
+			 	defaults:{
+			 		name:"潘胜男",
+			 		age:'2'
+			 	},
+			 	aboutMen:function(){
+			 		alert('我叫'+this.get('name')+',今年'+this.get('age')+'岁');
+			 	}
+			 });
+			 
+			 var man=new Man;
+			 //获取模型对象的属性
+			 alert(man.get('name'));
+			 //设置模型对象的属性
+			 man.set({name:'高姐',age:5}); 
+			 man.aboutMen();
+			 
+		</script>
+	</body>
+</html>

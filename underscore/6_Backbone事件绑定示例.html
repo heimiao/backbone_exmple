@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Backbone事件绑定示例</title>
+		<script src="../js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/Underscore-1.8.3min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/backbone.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/data.js" type="text/javascript" charset="utf-8"></script>
+	</head> 
+	<body>
+		<script type="text/javascript">
+			var Person = Backbone.Model.extend({
+				defaults: {
+					name: "马维超",
+					age: 28,
+					sex: "男",
+					score: 10,
+					address: "河北邯郸"
+				}
+			});
+			 //1使用on给对象绑定事件
+			var man = new Person;
+			man.on("change", function() {
+				console.log("man对象发生了改变");
+			});
+			man.set("name", "maweichao");
+			 //2使用on给对象的属性绑定事件
+			man.on("change:age", function(obj, value) {
+				console.log("监听man的属性age发生了改变" + value);
+			});
+			man.set("age", 13);
+			 //3获取为改变之前的属性值
+			man.on("change:score", function(m, n) {
+				var oldScore = m.previous("score"); //获取没有修改的值
+				console.log("你比上一年多考了" + (n - oldScore) + "分");
+			})
+			 man.on("change:age", function(m, n) {
+				var oldobj = m.previousAttributes(); //获取没有修改的值
+				console.log("你比上一年长了" + (n - oldobj.age) + "岁");
+			})
+			 man.set({
+				"score": 90,
+				"age": 29
+			});
+			 //4使用on绑定多个事件
+			man.on("change:score change:age", function(m, n) {
+				var oldScore = m.previous("score"); //获取没有修改的值
+				var newScore = m.get("score");
+				console.log("你比上一年多考了aaaa" + (newScore - oldScore) + "分");
+			})
+			 man.on({
+				"change:score": function() {},
+				"change:score": function() {}
+			})
+			 man.set("score", 120);
+			 //5.onece方法
+			 //6.trigger方法可以触发手动修改的属性和调用方法时候执行，可以监听自定义的事件例如
+			 // man.on({
+//				"myselfChange:score": function() {} 
+//			})
+			 //man.trigger('myselfChange')
+			 //5.off(events events,fn)方法是解绑摸个对象的方法可以是多个事件
+			 //5.onece方法
+		</script>
+	</body>
+
+</html>

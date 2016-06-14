@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Backbone事件绑定示例</title>
+		<script src="../js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/Underscore-1.8.3min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/backbone.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/data.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			 var Animal=Backbone.Model.extend({
+			 	defaults:{
+			 		name:"小狗",
+			 		age:"5",
+			 		weight:"10kg",
+			 		master:"马维超"
+			 	}
+			 });
+			 var dog=new Animal;
+			 var obj=_.extend({},Backbone.Events);
+			  obj.listenTo(dog,"change:name",function(model,value){
+			  	var oldName=model.previous("name");
+			  	var newName=model.get("name");
+			  	 if(oldName!=newName){
+			  	 	console.log("新值是："+newName+"     旧值是："+oldName);
+			  	 }
+			  });
+			  dog.set("name","小猫");
+		</script>
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>简单的mvc示例</title>
+		<script src="../js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/Underscore-1.8.3min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/backbone.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<script type="text/javascript">
+	$(function(){
+		window.Test=Backbone.Model.extend({
+			defaults:{
+			   content:''
+		     }
+			}); 
+	   window.TestList=Backbone.Collection.extend({
+	   	   model:Test
+	   });
+	   var data=new TestList({
+	   	content:'hello,backbone!'
+	   });
+	  
+	   window.TestView=Backbone.View.extend({
+	   	el:$('body'),
+	   	initialize:function(){
+	   		$("#divTip").html(data.models[0].get("content"));
+	   	}
+	   });
+	   window.App=new TestView;
+	})
+	</script> 
+	<body>
+		<div id="divTip">  </div>
+	</body> 
+</html>

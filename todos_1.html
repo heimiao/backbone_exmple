@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>view中的模版</title>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/Underscore-1.8.3min.js"></script>
+		<script src="js/backbone.js"></script>
+		<script type="text/javascript">
+		</script>
+	</head>
+	<body>
+		<div id="search_container"> </div> 
+		<script type="text/javascript">
+		    var Todo=Backbone.Model.extend({
+		    	defaults:{
+		    		title:"empty todo...",
+		    		order:Todos.nextOrder();
+		    		done:false
+		    	},
+		    	//设置任务完成状态
+		    	toggle:function(){
+		    		this.save({done:!this.get("done")});
+		    	}
+		    });
+		    var TodoList=Backbone.Collection.extend({
+		    	model:Todo,
+		    	//存储到浏览器，以todo-backbone命名的空间中
+		    	//此函数为backbone插件提供地址
+		    	localStorage:new Backbone.LocalStorage("todos-backbone"),
+		    	
+		    	//获取所有已经完成的任务数组
+		    });
+		</script>
+	</body> 
+</html>

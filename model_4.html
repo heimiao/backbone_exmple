@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>和服务器进行交互，对象的保存和获取</title>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/Underscore-1.8.3.js"></script>
+		<script src="js/backbone.js"></script>
+		<script type="text/javascript">
+		</script>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			var Animal = Backbone.Model.extend({
+				url: "http://localhost:8080/backbone/servlet/json",
+				initialize: function() {
+					console.log('hey,you create me');
+					this.bind("change:name", function() {
+						console.log("你改变了name属性为：" + this.get("name"));
+					});
+					this.bind("error", function(model, error) {
+						console.log(error);
+					})
+				},
+				defaults: {
+					name: "宠物",
+					age: 3
+				},
+				validate: function(_attr) {
+					if (_attr.name == "") return "name不能为空";
+				},
+				aboutMe: function() {
+					console.log(this.get("name") + "_____" + this.get("age"));
+				} 
+			});
+			var cat = new Animal;
+			
+		//cat.save();  到模型对应的 url， 数据格式为 json{"name":"the5fire","age":38}//然后接着就是从服务
+		//器端获取数据使用方法 fetch([options])var man1 = new Man;//
+		//第一种情况，如果直接使
+		//用 fetch 方法，那么他会发送 get 请求到你 model 的 url 中，
+		//你在服务器端可以通过判断是 get 还是 post 来进行对应的操作
+		//第二种情况，在 fetch 中加入参数，如下：man1.fetch({url:'/man/'});//这样，就会发送
+		//get 请求到/getmans/这个 url 中， 服务器返回的结果样式应该是对应的 json 格式数据， 同 save 时 POST 过去的格式。
+		//不过接受服务器端返回的数据方法是这样的		
+		
+			cat.fetch({
+				success:function(model,response){
+					alert("success");
+					//model为获取到的数据
+				},error:function(){
+					alert("获取数据失败！因为没有解决跨域请求问题不好意思哈");
+				}
+			})
+			
+			
+			
+		</script>
+	</body>
+
+</html>

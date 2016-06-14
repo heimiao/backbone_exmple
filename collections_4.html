@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>发送数据到服务端</title>
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/Underscore-1.8.3min.js"></script>
+		<script src="js/backbone.js"></script>
+		<script type="text/javascript">
+		</script>
+	</head> 
+	<body>
+		<script type="text/javascript">
+			var Animal = Backbone.Model.extend({
+				initialize: function() {
+					console.log();
+				},
+				defaults: function() {
+					name: "宠物"
+				}
+			});
+			var AnimalList = Backbone.Collection.extend({
+				model: Animal,
+				url:"http://localhost:8080/backbone/servlet/json"
+			});
+			var cat1 = new Animal({
+				name: "黑喵"
+			});
+			var cat2 = new Animal({
+				name: "黄喵"
+			});
+			var cat3 = new Animal({
+				name: "白喵"
+			});
+			
+			animallist = new AnimalList;  
+			var onecat=animallist.create({
+				name:"小喵"
+			}); 
+			
+		</script>
+		
+	</body>
+</html>
